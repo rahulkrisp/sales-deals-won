@@ -12,8 +12,9 @@ import json
 from io import BytesIO
 import streamlit as st
 from datetime import datetime, timedelta, date, time
-
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # In[17]:
 
 
@@ -41,10 +42,11 @@ url = (
     + event_array_json
 )
 
+access_token = os.getenv("access_token")  
 
 headers = {
     "accept": "text/plain",
-    "authorization": "Basic RXhwb3J0RXZlbnRzLjc0NDFiMy5tcC1zZXJ2aWNlLWFjY291bnQ6MDlwUlZHQTFVNnc4NExTTjZ3emR0TktYQ2ZXcUJIdVI=",
+    "authorization": f"Basic {access_token}",
 }
 
 response = requests.get(url, headers=headers)
